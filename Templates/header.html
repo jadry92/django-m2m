@@ -1,0 +1,22 @@
+<div class="container">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+    <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+      {% if request.user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url "users:detail" user.username %}">Welcome {{ user.username }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url "account_logout" %}">Logout</a>
+        </li>
+      {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url "account_signup" %}">Sign In</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url "account_login" %}">Login</a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+</div>
+
