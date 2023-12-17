@@ -38,15 +38,26 @@
     {% endblock javascript %}
   </head>
   <body>
-    {% include "header.html" %}
+    <div class="container-fluid vh-100">
+      <div class="row">
+        <div class="col-12">
+          {% include "header.html" %}
+        </div>
+      </div>
+      <div class="row h-100 ">
+        <div class="col-3 d-flex ">
+          {% include "sidebar.html" %}
+        </div>
+        <div class="col-9 overflow-scroll">
+          {% block content %}
+            <p>Use this document as a way to quick start any new project.</p>
+          {% endblock content %}
+        </div>
+      </div>
+      <!-- /container -->
+      {% block modal %}
+      {% endblock modal %}
     </div>
-      {% block content %}
-        <p>Use this document as a way to quick start any new project.</p>
-      {% endblock content %}
-    </div>
-    <!-- /container -->
-    {% block modal %}
-    {% endblock modal %}
     {% block inline_javascript %}
       {% comment %}
       Script tags with only code, no src (defer by default). To run
@@ -60,4 +71,3 @@
     {% endblock inline_javascript %}
   </body>
 </html>
-
