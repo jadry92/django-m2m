@@ -1,6 +1,6 @@
-# django-basic-template
+# Music App
 
-This is a start point for a project, it has the basic configuration for a django project.
+This project is an example of how to use ManyToManyField in Django.
 
 ** This project is not ready for production **
 
