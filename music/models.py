@@ -15,6 +15,6 @@ class Song(models.Model):
 
 
 class Artist(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
     songs = models.ManyToManyField(Song, related_name="artists")
     albums = models.ManyToManyField(Album, related_name="artists")

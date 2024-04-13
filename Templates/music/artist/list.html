@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <h3 class="text-center">List of Albums</h3>
+  </div>
+  {% if albums %}
+  <div class="row">
+    {% for album in albums %}
+    <p>{{ album.title }}</p>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endblock content %}
