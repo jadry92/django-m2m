@@ -3,14 +3,36 @@
 {% block content %}
 <div class="container">
   <div class="row">
-    <h3 class="text-center">List of Albums</h3>
+    <h3 class="text-center">List of Artists</h3>
   </div>
-  {% if albums %}
+  {% if artists %}
   <div class="row">
-    {% for album in albums %}
-    <p>{{ album.title }}</p>
+    {% for artist in artists %}
+    <p>{{ artist.name }} --
+    <a href="{% url 'music:update_artist' artist.pk %}" class="">Update Artist : {{ artist.name }}</a>
+    </p>
+    {% for album in artist.albums.all %}
+    <ul>
+      <li>{{ album.title }}
+      {% for song in album.songs.all %}
+        <ul>
+          <li><p>{{ song.title }}</p>
+            <ul>
+              {% for song_artist in song.artists.all %}
+              <li>{{ song_artist.name }}</li>
+              {% endfor %}
+            </ul>
+          </li>
+        </ul>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endfor %}
     {% endfor %}
   </div>
   {% endif %}
+  <div class="row">
+    <a href="{% url 'music:create_artist' %}" class="btn btn-primary">Add Album</a>
+  </div>
 </div>
 {% endblock content %}

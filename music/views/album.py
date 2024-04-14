@@ -2,7 +2,7 @@
 
 # Django
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-
+from django.urls import reverse
 # Local
 from music.models import Album, Song, Artist
 
@@ -26,6 +26,19 @@ class AlbumCreateView(CreateView):
     fields = ["title"]
     template_name = "music/album/create.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        next = self.request.GET.get("next", None)
+        if next:
+            context["next"] = next
+
+        return context
+
+    def get_success_url(self):
+        next = self.request.GET.get("next", None)
+        if next:
+            return next
+        return reverse("music:list_album")
 
 class AlbumUpdateView(UpdateView):
     """ Update view for albums. """

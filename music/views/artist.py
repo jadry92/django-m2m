@@ -2,6 +2,7 @@
 
 # Django
 from django.views.generic import FormView, ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 # Local
 from music.models import Artist
@@ -20,11 +21,12 @@ class ArtistDetailView(DetailView):
     template_name = "music/artist/detail.html"
 
 
-class ArtistCreateView(FormView):
+class ArtistCreateView(CreateView):
     """ Create view for artists. """
     template_name = "music/artist/create.html"
     form_class = ArtistForm
     model = Artist
+    success_url = reverse_lazy("music:list_artist")
 
     def get_queryset(self):
         """ Return the artist queryset. """
@@ -35,11 +37,13 @@ class ArtistCreateView(FormView):
 class ArtistUpdateView(UpdateView):
     """ Update view for artists. """
     model = Artist
-    fields = ["name"]
+    form_class = ArtistForm
     template_name = "music/artist/update.html"
+    success_url = reverse_lazy("music:list_artist")
 
 
 class ArtistDeleteView(DeleteView):
     """ Delete view for artists. """
     model = Artist
     template_name = "music/artist/delete.html"
+    success_url = reverse_lazy("music:list_artist")
